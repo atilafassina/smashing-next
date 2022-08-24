@@ -1,0 +1,7 @@
+name: Waiting on tests
+on: push
+jobs:
+  waiting:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🐣 no tests yet"

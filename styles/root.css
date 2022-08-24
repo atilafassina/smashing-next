@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::selection {
+    -webkit-text-fill-color: theme('colors.zinc.800');
+    @apply bg-orange-300 text-zinc-800;
+  }
+}
+@layer components {
+  a[target='_blank']::after {
+    content: '↗';
+    position: relative;
+    top: -1em;
+    left: 0.5em;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .text-shadow-white {
+    text-shadow: 0 0 0 theme('colors.white');
+  }
+
+  .text-shadow-orange-400 {
+    text-shadow: 0 0 0 theme('colors.orange.400');
+  }
+}

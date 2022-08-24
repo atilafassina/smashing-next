@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    // prettier extension
+    "esbenp.prettier-vscode",
+    // organise and lint tailwind classes
+    "heybourn.headwind",
+    // syntax support for postcss
+    "csstools.postcss",
+    // intelissense for tailwind
+    "bradlc.vscode-tailwindcss",
+    // color sidebar to easily spot what project it is
+    "johnpapa.vscode-peacock",
+    // manage Xata database from VS Code
+    "xata.xata"
+  ]
+}
