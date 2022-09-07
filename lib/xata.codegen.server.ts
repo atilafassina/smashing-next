@@ -5,10 +5,32 @@ import {
   XataRecord,
 } from "@xata.io/client";
 
-const tables = [] as const;
+const tables = [
+  {
+    name: "users",
+    columns: [
+      { name: "username", type: "string" },
+      { name: "password", type: "string" },
+    ],
+  },
+  {
+    name: "todos",
+    columns: [
+      { name: "message", type: "string" },
+      { name: "is_done", type: "bool" },
+      { name: "created_at", type: "datetime" },
+    ],
+  },
+] as const;
 
 export type SchemaTables = typeof tables;
 export type DatabaseSchema = SchemaInference<SchemaTables>;
+
+export type Users = DatabaseSchema["users"];
+export type UsersRecord = Users & XataRecord;
+
+export type Todos = DatabaseSchema["todos"];
+export type TodosRecord = Todos & XataRecord;
 
 const DatabaseClient = buildClient();
 

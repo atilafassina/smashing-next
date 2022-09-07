@@ -1,6 +1,9 @@
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '~/styles/root.css'
+import DefaultLayout from '~/layouts/default'
 
 const metas = {
   title: 'Advanced Next.js Masterclass',
@@ -12,8 +15,19 @@ const metas = {
       : 'https://smashing-next.vercel.app/og.jpg',
 }
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout =
+    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
+
+  return getLayout(
     <>
       <Head>
         <title>{metas.title}</title>
