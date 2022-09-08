@@ -3,8 +3,6 @@
     // prettier extension
     "esbenp.prettier-vscode",
     // organise and lint tailwind classes
-    "heybourn.headwind",
-    // syntax support for postcss
     "csstools.postcss",
     // intelissense for tailwind
     "bradlc.vscode-tailwindcss",

@@ -3,9 +3,9 @@
 <img src="/public/og.jpg" width="700" />
 
 ![uses TypeScript 4.x](https://img.shields.io/static/v1?color=blue&label=TypeScript&message=4&style=for-the-badge&logo=typescript&labelColor=d1d1d1&logoWidth=20%22)
-![uses Next.js 12.x](https://img.shields.io/static/v1?color=black&label=Next.js&message=12+&style=for-the-badge&logo=next.js&labelColor=000000&logoWidth=20%22&)
+![uses Next.js 13.x](https://img.shields.io/static/v1?color=black&label=Next.js&message=13+&style=for-the-badge&logo=next.js&labelColor=000000&logoWidth=20%22&)
 ![uses TailwindCSS 3.x](https://img.shields.io/static/v1?color=teal&label=tailwind&message=3&style=for-the-badge&logo=tailwindcss&labelColor=d1d1d1&logoWidth=20%22)
-![uses Node.js 16 LTS](https://img.shields.io/static/v1?color=238636&label=Node&message=16%20LTS&style=for-the-badge&logo=node.js&labelColor=000&logoWidth=20%22)
+![uses Node.js 18 LTS](https://img.shields.io/static/v1?color=238636&label=Node&message=18%20LTS&style=for-the-badge&logo=node.js&labelColor=000&logoWidth=20%22)
 
 </div>
 
