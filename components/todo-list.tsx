@@ -1,5 +1,5 @@
 import { type TodoProps } from '~/lib/db.server'
-import { useUpdateTodo } from '~/lib/update-todo-hook'
+import { useUpdateTodo } from '~/lib/hooks/update-todo'
 import {
   TODO_LIST_STYLES,
   TODO_CHECKBOX_STYLES,

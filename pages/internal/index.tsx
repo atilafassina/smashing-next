@@ -1,8 +1,8 @@
 import type { InferGetStaticPropsType } from 'next'
-import InternalLayout from '~/layouts/internal'
+import { useQuery } from '@tanstack/react-query'
+import { InternalLayout } from '~/layouts/internal'
 import { fetchTodos } from '~/lib/db.server'
 import { getTodos } from '~/lib/db.client'
-import { useQuery } from '@tanstack/react-query'
 import { TodoAdd } from '~/components/todo-add'
 import { TodoList } from '~/components/todo-list'
 

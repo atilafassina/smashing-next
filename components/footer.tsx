@@ -1,4 +1,4 @@
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="w-full font-mono bg-zinc-800">
       <div className="grid max-w-6xl grid-cols-1 gap-5 px-5 py-10 m-auto sm:px-0 sm:gap-0 sm:grid-cols-3 sm:place-items-center">

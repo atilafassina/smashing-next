@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
 
-export default function DefaultLayout({ children }) {
+export function DefaultLayout({ children }) {
   const [queryClient] = useState(() => new QueryClient())
 
   return (

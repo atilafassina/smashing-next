@@ -1,9 +1,9 @@
-import type { ReactElement, ReactNode } from 'react'
-import type { NextPage } from 'next'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
 import '~/styles/root.css'
-import DefaultLayout from '~/layouts/default'
+import { type ReactElement, type ReactNode } from 'react'
+import { type NextPage } from 'next'
+import { type AppProps } from 'next/app'
+import Head from 'next/head'
+import { DefaultLayout } from '~/layouts/default'
 
 const metas = {
   title: 'Advanced Next.js Masterclass',

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { nanoid } from 'nanoid'
 import { SuccessToast } from './success-toast'
+import { useAddTodo } from '~/lib/hooks/add-todo'
 import {
   ADD_TODO_CONTAINER_STYLES,
   ADD_TODO_WRAPPER_STYLES,
@@ -11,7 +12,6 @@ import {
   ADD_TODO_INPUT,
   ADD_TODO_SUBMIT,
 } from '~/styles/add-todo-classes'
-import { useAddTodo } from '~/lib/add-todo-hook'
 
 export function TodoAdd() {
   const addTodo = useAddTodo()
