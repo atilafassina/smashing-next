@@ -17,9 +17,9 @@
     "poststart:xata": "xata codegen",
     "xata": "xata codegen -o lib/xata.codegen.server.ts",
     "format": "prettier --write '**/*.{js,ts,tsx,json,md,yml}'",
-    "test": "vitest",
+    "test": "NODE_ENV=development vitest",
     "test:ci": "vitest --run",
-    "test:ui": "vitest --ui"
+    "test:ui": "NODE_ENV=development vitest --ui"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",

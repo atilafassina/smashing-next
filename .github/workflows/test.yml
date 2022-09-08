@@ -20,4 +20,4 @@ jobs:
 
       - name: Run tests against preview url
         id: integration
-        run: PREVIEW_URL=${{ steps.waitForVercelPreviewDeployment.outputs.url }} npm test:ci
+        run: PREVIEW_URL=${{ steps.waitForVercelPreviewDeployment.outputs.url }} npm run test:ci
