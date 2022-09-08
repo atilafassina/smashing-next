@@ -4,4 +4,20 @@ jobs:
   waiting:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🐣 no tests yet"
+      - name: Wait for Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: waitForVercelPreviewDeployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 1200
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm ci
+
+      - name: Run tests against preview url
+        id: integration
+        run: PREVIEW_URL=${{ steps.waitForVercelPreviewDeployment.outputs.url }} npm test:ci
