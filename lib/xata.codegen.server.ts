@@ -7,18 +7,20 @@ import {
 
 const tables = [
   {
-    name: "users",
-    columns: [
-      { name: "username", type: "string" },
-      { name: "password", type: "string" },
-    ],
-  },
-  {
     name: "todos",
     columns: [
       { name: "message", type: "string" },
       { name: "is_done", type: "bool" },
       { name: "created_at", type: "datetime" },
+      { name: "user", type: "link", link: { table: "users" } },
+    ],
+  },
+  {
+    name: "users",
+    columns: [
+      { name: "email", type: "email", unique: true },
+      { name: "slug", type: "string", unique: true },
+      { name: "photo", type: "string" },
     ],
   },
 ] as const;
@@ -26,11 +28,11 @@ const tables = [
 export type SchemaTables = typeof tables;
 export type DatabaseSchema = SchemaInference<SchemaTables>;
 
-export type Users = DatabaseSchema["users"];
-export type UsersRecord = Users & XataRecord;
-
 export type Todos = DatabaseSchema["todos"];
 export type TodosRecord = Todos & XataRecord;
+
+export type Users = DatabaseSchema["users"];
+export type UsersRecord = Users & XataRecord;
 
 const DatabaseClient = buildClient();
 

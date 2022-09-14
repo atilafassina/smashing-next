@@ -2,10 +2,10 @@ import { type TodoProps } from '~/lib/db.server'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { addTodo } from '~/lib/db.client'
 
-export const useAddTodo = () => {
+export const useAddTodo = (userEmail: string) => {
   const queryClient = useQueryClient()
 
-  return useMutation((newTodo: TodoProps) => addTodo(newTodo), {
+  return useMutation((newTodo: TodoProps) => addTodo(newTodo, userEmail), {
     onMutate: async (newTodo) => {
       await queryClient.cancelQueries(['todos'])
 

@@ -22,13 +22,15 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState } from 'react'
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
+  const [queryClient] = useState(() => new QueryClient())
 
   return getLayout(
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <title>{metas.title}</title>
 
@@ -73,6 +75,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       <Component {...pageProps} />
-    </>
+    </QueryClientProvider>
   )
 }

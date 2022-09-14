@@ -8,10 +8,18 @@ export type TodoProps = {
   created_at: string // Date's ISOString
 }
 
-export const addTodo = async ({ created_at, ...todo }: TodoProps) => {
+export type AddTodoParams = {
+  todo: TodoProps
+  userEmail: string
+}
+
+export const addTodo = async ({ todo, userEmail }: AddTodoParams) => {
+  const user = await xata.db.users.filter({ email: userEmail }).getFirst()
+
   return xata.db.todos.create({
     ...todo,
-    created_at: new Date(created_at),
+    created_at: new Date(todo.created_at),
+    user: user.id,
   })
 }
 
@@ -23,8 +31,15 @@ export const getTodoByMessage = async (message: string) => {
   return todo
 }
 
-export const fetchTodos = async () => {
-  const todos = await xata.db.todos.sort('created_at', 'desc').getAll()
+export const fetchTodos = async (email: string) => {
+  const todos = await xata.db.todos
+    .filter({
+      user: {
+        email,
+      },
+    })
+    .sort('created_at', 'desc')
+    .getAll()
 
   return todos.map((item) => ({
     ...item,

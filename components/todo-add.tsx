@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { SuccessToast } from './success-toast'
 import { useAddTodo } from '~/lib/hooks/add-todo'
@@ -13,9 +13,23 @@ import {
   ADD_TODO_SUBMIT,
 } from '~/styles/add-todo-classes'
 
-export function TodoAdd() {
-  const addTodo = useAddTodo()
+export function TodoAdd({ userEmail }) {
+  const addTodo = useAddTodo(userEmail)
   const [newTodoMessage, setNewTodoMessage] = useState('')
+
+  useEffect(() => {
+    let clearMutation = undefined
+
+    if (addTodo.isSuccess) {
+      clearMutation = setTimeout(() => {
+        addTodo.reset()
+      }, 5000)
+    }
+
+    return () => {
+      clearTimeout(clearMutation)
+    }
+  }, [addTodo])
 
   return (
     <div className={ADD_TODO_WRAPPER_STYLES}>
