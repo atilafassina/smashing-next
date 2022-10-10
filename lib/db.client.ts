@@ -20,6 +20,7 @@ export const updateTodo = async (checkbox: {
     }),
   })
   const newTodo = await res.json()
+
   return newTodo
 }
 
@@ -32,5 +33,14 @@ export const addTodo = async (newTodo: TodoProps, userEmail: string) => {
     }),
   })
 
-  return response
+  if (response.ok) {
+    return response
+  } else {
+    const err = await response.json()
+    throw new Error(
+      `ERROR [${response.status}]: ${
+        err.message ?? 'The server returned an error'
+      }`
+    )
+  }
 }

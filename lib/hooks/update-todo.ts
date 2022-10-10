@@ -6,19 +6,27 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient()
 
   return useMutation(updateTodo, {
-    onMutate: async (newTodo) => {
-      await queryClient.cancelQueries(['todos'])
+    onMutate: async (updatedTodo) => {
+      console.log(updatedTodo)
+      await queryClient.cancelQueries(['todos', updatedTodo.id])
 
-      const previousTodo: TodoProps = queryClient.getQueryData(['todos'])
+      const previousTodos = queryClient.getQueryData<TodoProps[]>(['todos'])
 
       queryClient.setQueryData(['todos'], (list: TodoProps[]) => {
-        return list.map((item) => (item.id === newTodo.id ? newTodo : item))
+        return list.map((item) =>
+          item.id === updatedTodo.id ? updatedTodo : item
+        )
       })
 
-      return { previousTodo, newTodo }
+      return { previousTodos, updatedTodo }
     },
     onSettled: () => {
       queryClient.invalidateQueries(['todos'])
+    },
+
+    onError: (err, _updatedTodo, context) => {
+      console.log(err)
+      queryClient.setQueryData(['todos'], context.previousTodos)
     },
   })
 }

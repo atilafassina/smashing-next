@@ -18,7 +18,8 @@ export const useAddTodo = (userEmail: string) => {
 
       return { previousTodos }
     },
-    onError: (_err, _newTodo, context) => {
+    onError: (err: Error, _newTodo, context) => {
+      console.log(err)
       queryClient.setQueryData(['todos'], context.previousTodos)
     },
     onSettled: () => {

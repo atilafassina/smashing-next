@@ -9,8 +9,6 @@ import { getTodos } from '~/lib/db.client'
 import { TodoAdd } from '~/components/todo-add'
 import { TodoList } from '~/components/todo-list'
 import { getSession } from 'next-auth/react'
-// import { unstable_getServerSession } from 'next-auth'
-// import { authOptions } from '../api/auth/[...nextauth]'
 
 export default function TodosPage({
   todos,
@@ -28,6 +26,7 @@ export default function TodosPage({
   )
 
   if (!user) return null
+
   return (
     <InternalLayout>
       {user && (
