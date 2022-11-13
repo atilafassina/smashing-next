@@ -2,8 +2,14 @@ import '~/styles/root.css'
 import { type ReactElement, type ReactNode } from 'react'
 import { type NextPage } from 'next'
 import { type AppProps } from 'next/app'
+import { Inter } from '@next/font/google'
 import Head from 'next/head'
-import { DefaultLayout } from '~/layouts/default'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState } from 'react'
+
+const inter = Inter({
+  variable: '--font-inter',
+})
 
 const metas = {
   title: 'Advanced Next.js Masterclass',
@@ -22,11 +28,10 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useState } from 'react'
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   const [queryClient] = useState(() => new QueryClient())
 
   return getLayout(
@@ -74,7 +79,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           media="(prefers-color-scheme: light)"
         />
       </Head>
-      <Component {...pageProps} />
+      <main
+        className={`${inter.variable} bg-black text-white overflow-x-hidden min-h-screen m-0 p-0 grid grid-rows-[auto,1fr,auto]`}
+      >
+        <Component {...pageProps} />
+      </main>
     </QueryClientProvider>
   )
 }
