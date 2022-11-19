@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getSession } from 'next-auth/react'
 import { GithubLogin } from '~/components/github-login'
 import { ExternalLayout } from '~/layouts/external'
+import { unstable_getServerSession } from 'next-auth'
 
 const IndexPage = ({
   isAuthenticated,
@@ -25,6 +26,7 @@ const IndexPage = ({
 
 export const getServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
+  // const unstable = await unstable_getServerSession(req)
 
   return {
     props: {

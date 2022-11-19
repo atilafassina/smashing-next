@@ -9,6 +9,7 @@ import { useState } from 'react'
 
 const inter = Inter({
   variable: '--font-inter',
+  subsets: ['latin', 'latin-ext'],
 })
 
 const metas = {

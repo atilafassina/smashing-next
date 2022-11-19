@@ -7,7 +7,6 @@ export const useUpdateTodo = () => {
 
   return useMutation(updateTodo, {
     onMutate: async (updatedTodo) => {
-      console.log(updatedTodo)
       await queryClient.cancelQueries(['todos', updatedTodo.id])
 
       const previousTodos = queryClient.getQueryData<TodoProps[]>(['todos'])
