@@ -1,6 +1,11 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '~/styles/root.css'
+import { Inter } from '@next/font/google'
+
+const inter = Inter({
+  variable: '--font-inter',
+})
 
 const metas = {
   title: 'Advanced Next.js Masterclass',
@@ -58,7 +63,9 @@ export default function App({ Component, pageProps }: AppProps) {
           media="(prefers-color-scheme: light)"
         />
       </Head>
-      <Component {...pageProps} />
+      <div className={`${inter.variable}`}>
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }

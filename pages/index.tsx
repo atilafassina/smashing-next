@@ -1,5 +1,7 @@
 import DefaultLayout from '~/layouts/default'
 import Footer from '~/components/footer'
+import { getSession } from 'next-auth/react'
+import { unstable_getServerSession } from 'next-auth'
 
 const IndexPage = () => (
   <DefaultLayout>
@@ -46,5 +48,17 @@ const IndexPage = () => (
     <Footer />
   </DefaultLayout>
 )
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req })
+
+  const unstable = await unstable_getServerSession(req)
+
+  return {
+    props: {
+      isAuthenticated: Boolean(session),
+    },
+  }
+}
 
 export default IndexPage
