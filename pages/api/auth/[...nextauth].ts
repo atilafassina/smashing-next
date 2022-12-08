@@ -13,7 +13,7 @@ const authOption = {
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
-        token.accesToken = account.access_token
+        token.accessToken = account.access_token
       }
 
       return token

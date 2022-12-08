@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }: AppProps) {
           media="(prefers-color-scheme: light)"
         />
       </Head>
-      <div className={`${inter.variable}`}>
+      <div className={`${inter.variable} font-sans`}>
         <Component {...pageProps} />
       </div>
     </>
