@@ -2,6 +2,7 @@ import DefaultLayout from '~/layouts/default'
 import Footer from '~/components/footer'
 import { getSession } from 'next-auth/react'
 import { unstable_getServerSession } from 'next-auth'
+import { GithubLogin } from '~/components/github-login'
 
 const IndexPage = () => (
   <DefaultLayout>
@@ -36,14 +37,7 @@ const IndexPage = () => (
           🔥
         </span>
       </p>
-      <a
-        className="px-10 py-5 text-5xl text-black transition-transform border-2 border-orange-400 rounded-lg shadow-md mt-36 bg-gradient-to-tr from-orange-600 via-amber-400 to-yellow-200 shadow-orange-500 hover:scale-125 focus:scale-125"
-        href="https://smashingconf.com/online-workshops/workshops/advanced-nextjs-atila-fassina"
-        target="_blank"
-        rel="noopener"
-      >
-        Learn more
-      </a>
+      <GithubLogin />
     </article>
     <Footer />
   </DefaultLayout>
@@ -51,8 +45,6 @@ const IndexPage = () => (
 
 export const getServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
-
-  const unstable = await unstable_getServerSession(req)
 
   return {
     props: {

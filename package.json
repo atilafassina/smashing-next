@@ -16,7 +16,10 @@
     "poststart:xata": "xata codegen",
     "xata:codegen": "xata codegen",
     "xata:start": "xata init --codegen=lib/xata.codegen.ts",
-    "format": "prettier --write '**/*.{js,ts,tsx,json,md,yml}'"
+    "format": "prettier --write '**/*.{js,ts,tsx,json,md,yml}'",
+    "test": "NODE_ENV=development vitest",
+    "test:ci": "vitest --run",
+    "test:ui": "NODE_ENV=development vitest --ui"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
@@ -39,6 +42,7 @@
     "@next/font": "^13.0.6",
     "@xata.io/client": "^0.21.2",
     "csp-header": "^5.1.0",
+    "isomorphic-fetch": "^3.0.0",
     "next": "^13.0.5",
     "next-auth": "^4.18.0",
     "react": "^18.2.0",
