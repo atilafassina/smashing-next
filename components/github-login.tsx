@@ -1,5 +1,5 @@
+'use client'
 import { signIn } from 'next-auth/react'
-// import { LoginIcon } from '@heroicons/react/outline'
 
 const LoginIcon = ({ className }) => {
   return (
@@ -21,7 +21,7 @@ const LoginIcon = ({ className }) => {
 }
 
 const GithubLogin = () => (
-  <section className="grid gap-2 text-lg">
+  <section className="grid gap-2 text-lg text-white">
     <div className="grid gap-2 mt-32 text-center">
       <button
         className="block px-8 py-4 text-3xl transition-colors border-4 border-purple-400 rounded-md hover:bg-purple-500 focus:bg-purple-500"

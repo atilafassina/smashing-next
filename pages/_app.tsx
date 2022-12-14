@@ -2,10 +2,10 @@ import '~/styles/root.css'
 import { type ReactElement, type ReactNode } from 'react'
 import { type NextPage } from 'next'
 import { type AppProps } from 'next/app'
-import { Inter } from '@next/font/google'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
+import { Inter } from '@next/font/google'
 
 const inter = Inter({
   variable: '--font-inter',

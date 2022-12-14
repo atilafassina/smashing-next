@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { SuccessToast } from './success-toast'
