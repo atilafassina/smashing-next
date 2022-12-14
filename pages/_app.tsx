@@ -2,6 +2,8 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '~/styles/root.css'
 import { Inter } from '@next/font/google'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState } from 'react'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -18,8 +20,10 @@ const metas = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <title>{metas.title}</title>
 
@@ -66,6 +70,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={`${inter.variable} font-sans`}>
         <Component {...pageProps} />
       </div>
-    </>
+    </QueryClientProvider>
   )
 }
