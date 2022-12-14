@@ -1,11 +1,11 @@
 import type { NextApiHandler } from 'next'
+import { toggleTodo } from '~/lib/db.server'
 
 const updateTodo: NextApiHandler = async (req, res) => {
-  res.send({
-    message: 'Updated Todo endpoint',
-  })
+  const { id, is_done } = JSON.parse(req.body)
+  const updatedTodo = await toggleTodo(id, is_done)
 
-  return
+  res.send(updatedTodo)
 }
 
 export default updateTodo

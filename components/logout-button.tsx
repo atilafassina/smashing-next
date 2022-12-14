@@ -1,5 +1,4 @@
 import { signOut } from 'next-auth/react'
-import { type ReactNode } from 'react'
 const LogoutIcon = () => {
   return (
     <svg

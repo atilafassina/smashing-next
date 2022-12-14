@@ -1,9 +1,11 @@
 import type { NextApiHandler } from 'next'
+import { fetchTodos } from '~/lib/db.server'
 
 const updateTodo: NextApiHandler = async (req, res) => {
-  res.send({
-    message: 'Get Todos',
-  })
+  const userEmail = req.query.userEmail as string
+  const todos = await fetchTodos(userEmail)
+
+  res.send(todos)
 
   return
 }

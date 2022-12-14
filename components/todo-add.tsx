@@ -14,7 +14,20 @@ import {
 } from '~/styles/add-todo-classes'
 
 export function TodoAdd({ userEmail }) {
+  const addTodo = useAddTodo(userEmail)
   const [newTodoMessage, setNewTodoMessage] = useState('')
+
+  useEffect(() => {
+    let clearMutation = undefined
+
+    if (addTodo.isSuccess) {
+      setNewTodoMessage('')
+
+      clearMutation = setTimeout(() => {
+        addTodo.reset()
+      }, 5000)
+    }
+  }, [addTodo.isSuccess])
 
   return (
     <>
@@ -25,6 +38,12 @@ export function TodoAdd({ userEmail }) {
             className={ADD_TODO_FORM_STYLES}
             onSubmit={(evt) => {
               evt.preventDefault()
+              addTodo.mutate({
+                id: nanoid(),
+                message: newTodoMessage,
+                is_done: false,
+                created_at: new Date().toISOString(),
+              })
             }}
           >
             <div className={ADD_TODO_FIELD_WRAPPER}>
@@ -38,21 +57,24 @@ export function TodoAdd({ userEmail }) {
                   autoComplete="off"
                   className={ADD_TODO_INPUT}
                   value={newTodoMessage}
-                  readOnly={}
+                  readOnly={false}
                   onChange={(evt) => {
                     setNewTodoMessage(evt.currentTarget.value)
                   }}
                 />
               </div>
-              <button type="submit" className={ADD_TODO_SUBMIT} disabled={}>
-                save
+              <button
+                type="submit"
+                className={ADD_TODO_SUBMIT}
+                disabled={false}
+              >
+                {addTodo.isLoading ? 'saving ...' : 'save'}
               </button>
             </div>
-            {false && (
+            {addTodo.isError && (
               <>
                 <small className="text-red-400 ">
-                  Server returned:{' '}
-                  <span className="font-mono">message error</span>
+                  <span className="font-mono">{addTodo.error.message}</span>
                 </small>
                 <button
                   type="submit"
@@ -65,7 +87,7 @@ export function TodoAdd({ userEmail }) {
           </form>
         </div>
       </div>
-      {false && <SuccessToast />}
+      {addTodo.isSuccess && <SuccessToast />}
     </>
   )
 }

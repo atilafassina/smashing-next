@@ -26,7 +26,13 @@ export function TodoList({ list }: { list: TodoProps[] }) {
             className={TODO_CHECKBOX_STYLES}
             value={item.message}
             defaultChecked={item.is_done}
-            onChange={(evt) => {}}
+            onChange={(evt) => {
+              mutateTodo({
+                id: evt.currentTarget.id,
+                message: evt.currentTarget.value,
+                checked: evt.currentTarget.checked,
+              })
+            }}
           />
         </li>
       ))}

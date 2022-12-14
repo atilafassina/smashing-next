@@ -3,7 +3,8 @@ import Head from 'next/head'
 import '~/styles/root.css'
 import { Inter } from '@next/font/google'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useState } from 'react'
+import { ReactElement, ReactNode, useState } from 'react'
+import { NextPage } from 'next'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -19,10 +20,20 @@ const metas = {
       : 'https://smashing-next.vercel.app/og.jpg',
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(() => new QueryClient())
 
-  return (
+  const getLayout = Component.getLayout ?? ((page) => page)
+
+  return getLayout(
     <QueryClientProvider client={queryClient}>
       <Head>
         <title>{metas.title}</title>

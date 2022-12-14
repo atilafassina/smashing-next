@@ -16,7 +16,15 @@ export type AddTodoParams = {
 
 export type TodoRecords = Awaited<ReturnType<typeof fetchTodos>>
 
-export const addTodo = async () => {}
+export const addTodo = async ({ todo, userEmail }: AddTodoParams) => {
+  const user = await xata.db.users.filter({ email: userEmail }).getFirst()
+
+  return xata.db.todos.create({
+    ...todo,
+    created_at: new Date(todo.created_at),
+    user: user.id,
+  })
+}
 
 export const fetchTodos = async (email: string) => {
   const todos = await xata.db.todos
@@ -34,6 +42,17 @@ export const fetchTodos = async (email: string) => {
   }))
 }
 
-export const getTodoByMessage = async () => {}
+export const getTodoByMessage = async (message: string) => {
+  const todo = await xata.db.todos.filter({ message }).getFirst()
 
-export const toggleTodo = async () => {}
+  return todo
+}
+
+export const toggleTodo = async (
+  id: TodosRecord['id'],
+  is_done: TodosRecord['is_done']
+) => {
+  const newTodo = await xata.db.todos.update({ id, is_done })
+
+  return newTodo
+}
