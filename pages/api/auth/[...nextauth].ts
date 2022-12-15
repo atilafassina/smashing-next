@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { getXataClient } from '~/lib/xata.codegen.server'
 
-const authOption = {
+export const authOption = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,

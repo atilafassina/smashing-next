@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { SuccessToast } from './success-toast'
@@ -57,7 +59,7 @@ export function TodoAdd({ userEmail }) {
                   autoComplete="off"
                   className={ADD_TODO_INPUT}
                   value={newTodoMessage}
-                  readOnly={false}
+                  readOnly={addTodo.isLoading}
                   onChange={(evt) => {
                     setNewTodoMessage(evt.currentTarget.value)
                   }}
@@ -66,7 +68,7 @@ export function TodoAdd({ userEmail }) {
               <button
                 type="submit"
                 className={ADD_TODO_SUBMIT}
-                disabled={false}
+                disabled={addTodo.isLoading}
               >
                 {addTodo.isLoading ? 'saving ...' : 'save'}
               </button>

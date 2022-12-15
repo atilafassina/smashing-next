@@ -1,3 +1,5 @@
+'use client'
+
 import { type TodoProps } from '~/lib/db.server'
 import { useUpdateTodo } from '~/lib/hooks/update-todo'
 import {

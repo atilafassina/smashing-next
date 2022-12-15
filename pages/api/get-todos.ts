@@ -1,13 +1,18 @@
-import type { NextApiHandler } from 'next'
 import { fetchTodos } from '~/lib/db.server'
+import type { NextRequest } from 'next/server'
 
-const updateTodo: NextApiHandler = async (req, res) => {
-  const userEmail = req.query.userEmail as string
+export const config = {
+  runtime: 'experimental-edge',
+}
+const updateTodo = async (req: NextRequest) => {
+  const { searchParams } = new URL(req.nextUrl)
+  const userEmail = searchParams.get('userEmail')
+
   const todos = await fetchTodos(userEmail)
 
-  res.send(todos)
+  const res = new Response(JSON.stringify(todos), { status: 200 })
 
-  return
+  return res
 }
 
 export default updateTodo

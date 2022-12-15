@@ -1,23 +1,33 @@
-import type { NextApiHandler } from 'next'
+import type { NextRequest } from 'next/server'
 import { addTodo } from '~/lib/db.server'
 
-let attempt = 0
+export const config = {
+  runtime: 'experimental-edge',
+}
 
-const addTodos: NextApiHandler = async (req, res) => {
-  attempt++
+// let attempt = 0
 
-  if (attempt % 3 === 0) {
-    const { userEmail, newTodo } = JSON.parse(req.body)
+const addTodos = async (req: NextRequest) => {
+  // attempt++
 
-    const todo = await addTodo({ todo: newTodo, userEmail })
-    res.send(todo)
+  const body = req.body
+  // if (attempt % 3 === 0) {
+  const { userEmail, newTodo } = await req.json()
 
-    return
-  } else {
-    res.status(400).json({
-      message: 'DYNAMITE 🧨',
-    })
-  }
+  const todo = await addTodo({ todo: newTodo, userEmail })
+  const res = new Response(
+    JSON.stringify({
+      todo,
+    }),
+    { status: 200 }
+  )
+
+  return res
+  // } else {
+  //   res.status(400).json({
+  //     message: 'DYNAMITE 🧨',
+  //   })
+  // }
 }
 
 export default addTodos
