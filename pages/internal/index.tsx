@@ -33,7 +33,7 @@ export default function InternalPage({ user, todos }: InterPageProps) {
         />
         <h1 className="h-full text-6xl">{user.name}</h1>
       </header>
-      <div>
+      <div className="w-full">
         <TodoAdd userEmail={user.email} />
         <TodoList list={todoList} />
       </div>

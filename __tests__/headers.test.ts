@@ -1,3 +1,4 @@
+import 'isomorphic-fetch'
 import { describe, expect, test } from 'vitest'
 import { securityHeaders } from '../lib/security-headers'
 
